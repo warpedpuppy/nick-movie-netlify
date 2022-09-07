@@ -8,7 +8,7 @@ const morgan = require("morgan");
 
 const path = require("path");
 
-const accessLogStream = fs.createWriteStream(path.join(movie_api, "log.txt"), {
+const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
   flags: "a",
 });
 
