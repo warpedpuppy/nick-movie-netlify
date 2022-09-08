@@ -16,12 +16,6 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(express.static("public"));
 
-app.use("/documentation.html", express.static("public"));
-
-app.use("/index.html", express.static("public"));
-
-app.use("/404.html", express.static("public"));
-
 const bodyParser = require("body-parser"),
   methodOverride = require("method-override");
 
