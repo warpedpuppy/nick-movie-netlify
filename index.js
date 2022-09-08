@@ -20,6 +20,8 @@ app.use("/documentation.html", express.static("public"));
 
 app.use("/index.html", express.static("public"));
 
+app.use("/404.html", express.static("public"));
+
 const bodyParser = require("body-parser"),
   methodOverride = require("method-override");
 
@@ -70,13 +72,11 @@ app.get("/movies", (req, res) => {
   res.json(topMovies);
 });
 
-app.get("/", (req, res) => {
-  res.send("Welcome to my movie app!");
-});
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
+
+app.use(methodOverride());
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
