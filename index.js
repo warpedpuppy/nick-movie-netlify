@@ -28,11 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(methodOverride());
-//Log any errors
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
+
 //User Array
 let users = [
   {
@@ -291,7 +287,11 @@ app.delete("/users/:id", (req, res) => {
     res.status(400).send("User not found.");
   }
 });
-
+//Log any errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 // Server running pn port 8080
 app.listen(8080, () => {
   console.log("Your app is listening on port 8080.");
