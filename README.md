@@ -1,4 +1,4 @@
-  <h1>Find my movie Api</h1>
+  <h1>NixFlix</h1>
     <p>
       This is my documentation file requiere to give you instructions in how to
       use this API. Hear we have the requirements for this API to work:
