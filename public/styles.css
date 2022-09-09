@@ -1,0 +1,21 @@
+th {
+  border: 1px solid black;
+}
+tr {
+  border: 1px solid black;
+}
+td {
+  border: 1px solid black;
+}
+.table-end {
+  border: 1px dashed black;
+}
+table {
+  background-color: lightgray;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+}
