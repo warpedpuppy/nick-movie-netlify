@@ -1,6 +1,6 @@
   <h1>NixFlix</h1>
     <p>
-      This is my documentation file requiere to give you instructions in how to
+      This is my README file to give you instructions in how to
       use this API. Hear we have the requirements for this API to work:
     </p>
     <h3>App Dependencies</h3>
