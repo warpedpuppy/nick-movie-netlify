@@ -49,14 +49,17 @@
       <tr>
         <td>Return all movies use; /movies</td>
         <td>To add user use; /users</td>
-        <td>To find user by id use; /users/:id</td>
-        <td>To delete user use; /users/:id</td>
+        <td>To find user by id use; /users/:Username</td>
+        <td>To delete user use; /users/:Username</td>
       </tr>
       <tr>
-        <td>Return specific move use; /movies/:title</td>
+        <td>Return specific move use; /movies/:</td>
         <td>To add a favorite movie use; /users/:id/:movieTitle</td>
         <td></td>
-        <td>To delete a user's favorite movie use; /users/:id/:movieTitle</td>
+        <td>
+          To delete a user's favorite movie use;
+          /users/:Username/movies/:movieID
+        </td>
       </tr>
       <tr>
         <td>Return director info use; /directors/:directorName</td>
@@ -65,13 +68,13 @@
         <td></td>
       </tr>
       <tr>
-        <td>Return Genre info use; /movies/genre/:genreName</td>
+        <td>Return Genre info use; /movies/genres/</td>
         <td></td>
         <td></td>
         <td></td>
       </tr>
       <tr>
-        <td>Return user list use; /users</td>
+        <td>Return users list use; /users</td>
         <td></td>
         <td></td>
         <td></td>
