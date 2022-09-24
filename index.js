@@ -1,4 +1,6 @@
 //Require models & packages
+const { check, validationResult } = require("express-validator"); //2.10
+
 const mongoose = require("mongoose");
 
 const Models = require("./models.js");
@@ -42,6 +44,25 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const cors = require("cors"); //2.10
+let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+//2.10
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        // If a specific origin isn’t found on the list of allowed origins
+        let message =
+          "The CORS policy for this application doesn/n't allow access from origin " +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
 let auth = require("./auth")(app); //App able to use auth.js 2.9
 
@@ -203,38 +224,72 @@ app.get(
       });
   }
 );
-//Add user 2.8
-app.post("/users", (req, res) => {
-  Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.Username + "already exists");
-      } else {
-        Users.create({
-          Username: req.body.Username,
-          Password: req.body.Password,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday,
-        })
-          .then((user) => {
-            res.status(201).json(user);
+//Add user 2.10
+app.post(
+  "/users",
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail(),
+  ],
+  (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    let hashPassword = Users.hashPassword(req.body.Password); //2.10
+    Users.findOne({ Username: req.body.Username })
+      .then((user) => {
+        if (user) {
+          return res.status(400).send(req.body.Username + "already exists");
+        } else {
+          Users.create({
+            Username: req.body.Username,
+            Password: hashedPassword, //2.10
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
           })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send("Error " + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-    });
-});
+            .then((user) => {
+              res.status(201).json(user);
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send("Error " + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
 //Update user info by unsername 2.8
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail(),
+  ],
   (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
       { USername: req.params.Username },
       {
@@ -327,6 +382,8 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 // Server running pn port 8080
-app.listen(8080, () => {
-  console.log("Your app is listening on port 8080.");
+//2.10 function updated to allow port to change
+const port = process.env.PORT || 8080;
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
 });
