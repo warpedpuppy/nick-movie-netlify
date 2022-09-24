@@ -13,10 +13,13 @@ const Genres = Models.Genre;
 
 const Directors = Models.Director;
 
-mongoose.connect("mongodb://localhost:27017/NixFlixDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://nickBeasley:YLPxtXvvBF0ArmBB@nixflix.l2argrx.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const express = require("express");
 
@@ -72,6 +75,10 @@ require("./passport");
 app.use(bodyParser.json());
 
 app.use(methodOverride());
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
 
 //Get all movies in json 2.8
 app.get(
