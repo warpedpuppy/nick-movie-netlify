@@ -66,13 +66,12 @@ app.use(
     },
   })
 );
+app.use(bodyParser.json());
 
 let auth = require("./auth")(app); //App able to use auth.js 2.9
 
 const passport = require("passport");
 require("./passport");
-
-app.use(bodyParser.json());
 
 app.use(methodOverride());
 
@@ -257,7 +256,7 @@ app.post(
         } else {
           Users.create({
             Username: req.body.Username,
-            Password: hashedPassword, //2.10
+            Password: hashPassword, //2.10
             Email: req.body.Email,
             Birthday: req.body.Birthday,
           })
