@@ -13,13 +13,10 @@ const Genres = Models.Genre;
 
 const Directors = Models.Director;
 
-mongoose.connect(
-  "mongodb+srv://nickBeasley:YLPxtXvvBF0ArmBB@nixflix.l2argrx.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.CONNECTION_URI || "mongodb://localhost:27017", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const express = require("express");
 
