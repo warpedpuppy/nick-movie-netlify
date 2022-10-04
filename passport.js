@@ -5,8 +5,6 @@ const passport = require("passport"),
   Models = require("./models.js"),
   passportJWT = require("passport-jwt");
 
-Config = require("./config");
-
 let Users = Models.User,
   JWTStrategy = passportJWT.Strategy,
   ExtractJWT = passportJWT.ExtractJwt;
