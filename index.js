@@ -1,5 +1,9 @@
+require("dotenv").config();
+
 //Require models & packages
 const { check, validationResult } = require("express-validator"); //2.10
+
+const Config = require("./config");
 
 const mongoose = require("mongoose");
 
@@ -13,7 +17,7 @@ const Genres = Models.Genre;
 
 const Directors = Models.Director;
 
-mongoose.connect(process.env.CONNECTION_URI || "mongodb://localhost:27017", {
+mongoose.connect(Config.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
