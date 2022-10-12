@@ -54,6 +54,7 @@ let allowedOrigins = [
   "http://localhost:8080",
   "http://testsite.com",
   "http://localhost:1234",
+  "https://nixflix.herokuapp.com",
 ];
 //2.10
 app.use(
