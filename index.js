@@ -85,20 +85,20 @@ app.get("/", (req, res) => {
 });
 
 //Get all movies in json 2.8
-// app.get(
-//   "/movies",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-app.get("/movies", function (req, res) {
-  Movies.find()
-    .then(function (movies) {
-      res.status(201).json(movies);
-    })
-    .catch(function (error) {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-    });
-});
+app.get(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.find()
+      .then(function (movies) {
+        res.status(201).json(movies);
+      })
+      .catch(function (error) {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
 //Get genres 2.8
 app.get(
   "/genres",
