@@ -24,12 +24,10 @@ mongoose.connect(Config.CONNECTION_URI, {
 
 const express = require("express");
 
-const fs = require("fs");
-
 const app = express();
 
 const morgan = require("morgan");
-
+const fs = require("fs");
 const path = require("path");
 
 const uuid = require("uuid");
