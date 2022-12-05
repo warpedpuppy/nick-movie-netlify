@@ -1,13 +1,13 @@
 require("dotenv").config();
 
 
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-const Models = require("../models.js");
-const Movies = Models.Movie;
-const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
+// const Models = require("../models.js");
+// const Movies = Models.Movie;
+// const Users = Models.User;
+// const Genres = Models.Genre;
+// const Directors = Models.Director;
 
 const { API_ROOT, CONNECTION_URI } = require("../config");
 
