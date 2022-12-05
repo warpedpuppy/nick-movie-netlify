@@ -4,10 +4,10 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const Models = require("../models.js");
-// const Movies = Models.Movie;
-// const Users = Models.User;
-// const Genres = Models.Genre;
-// const Directors = Models.Director;
+const Movies = Models.Movie;
+const Users = Models.User;
+const Genres = Models.Genre;
+const Directors = Models.Director;
 
 const { API_ROOT, CONNECTION_URI } = require("../config");
 
@@ -20,13 +20,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-// const morgan = require("morgan");
-// const fs = require("fs");
-// const path = require("path");
 const serverless = require("serverless-http");
-
-
-
 
 const API_ROUTER = express.Router();
 
@@ -34,15 +28,14 @@ API_ROUTER
 .get(
     "/movies",
     (req, res) => {
-		res.send("movies get hit");
-    //   Movies.find()
-    //     .then(function (movies) {
-    //       res.status(201).json(movies);
-    //     })
-    //     .catch(function (error) {
-    //       console.error(error);
-    //       res.status(500).send("Error: " + error);
-    //     });
+      Movies.find()
+        .then(function (movies) {
+          res.status(201).json(movies);
+        })
+        .catch(function (error) {
+          console.error(error);
+          res.status(500).send("Error: " + error);
+        });
     }
   )
   .post("/movies", (req, res) => {
