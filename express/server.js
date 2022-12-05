@@ -3,18 +3,18 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 
-const Models = require("../models.js");
-const Movies = Models.Movie;
-const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
+// const Models = require("../models.js");
+// const Movies = Models.Movie;
+// const Users = Models.User;
+// const Genres = Models.Genre;
+// const Directors = Models.Director;
 
 const { API_ROOT, CONNECTION_URI } = require("../config");
 
-// mongoose.connect(CONNECTION_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+mongoose.connect(CONNECTION_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const express = require("express");
 const app = express();
