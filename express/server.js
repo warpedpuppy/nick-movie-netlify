@@ -1,28 +1,13 @@
-require("dotenv").config();
 
 
-const mongoose = require("mongoose");
+const { API_ROOT } = require("../config");
 
-const Models = require("../models.js");
-const Movies = Models.Movie;
-const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
-
-const { API_ROOT, CONNECTION_URI } = require("../config");
-
-// mongoose.connect(CONNECTION_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
 
 const express = require("express");
 const app = express();
 app.use(express.json());
 
-const morgan = require("morgan");
-const fs = require("fs");
-const path = require("path");
+
 const serverless = require("serverless-http");
 
 
