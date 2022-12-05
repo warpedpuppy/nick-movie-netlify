@@ -10,22 +10,12 @@ const Genres = Models.Genre;
 const Directors = Models.Director;
 
 const { API_ROOT, CONNECTION_URI } = require("../config");
-console.log("********************************")
-console.log("********************************")
-console.log("**********before**************")
-console.log("********************************")
-console.log("********************************")
-console.log("********************************")
-mongoose.connect(CONNECTION_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-console.log("********************************")
-console.log("********************************")
-console.log("**********after**************")
-console.log("********************************")
-console.log("********************************")
-console.log("********************************")
+
+// mongoose.connect(CONNECTION_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
 const express = require("express");
 const app = express();
 app.use(express.json());
